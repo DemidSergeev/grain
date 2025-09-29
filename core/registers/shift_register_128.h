@@ -1,17 +1,20 @@
-#ifndef SHIFT_REGISTERS_H
-#define SHIFT_REGISTERS_H
+#ifndef SHIFT_REGISTER_H
+#define SHIFT_REGISTER_H
 
 #include <cstdint>
 #include <cstddef>
 
-#include "register128.h"
+#include "register_128.h"
 
-namespace grain {
-    /// @brief 128-bit shift register.
-    /// Is a base class for LFSR (Linear Function SR) and NFSR (Non-linear function SR)
-    class ShiftRegister128 {
+namespace grain
+{
+
+/// @brief 128-bit shift register.
+/// Is a base class for LFSR (Linear Function SR) and NFSR (Non-linear function SR)
+class ShiftRegister128
+{
     public:
-        ShiftRegister128(Register128& init_state);
+        ShiftRegister128(const Register128& init_state);
 
         /// @brief Get value of bit at `index`
         /// @param index 
@@ -26,14 +29,11 @@ namespace grain {
         /// @brief Shift the register's state to the left and insert the `new_bit`.
         /// @param new_bit bit to be inserted.
         void shift_left_by_one(uint8_t new_bit);
-    private:
+
+    protected:
         Register128 state;
-    };
+};
 
-    class LFSR128 : public ShiftRegister128 {
-    public:
-        LFSR128()
-    }
-}
+} // namespace grain
 
-#endif //SHIFT_REGISTERS_H
+#endif //SHIFT_REGISTER_H

@@ -1,5 +1,4 @@
-#include "shift_registers.h"
-#include "register128.h"
+#include "shift_register_128.h"
 
 
 using namespace grain;
@@ -7,7 +6,9 @@ using namespace grain;
 
 ShiftRegister128::ShiftRegister128(Register128& init_state) : state(init_state) {}
 
-uint8_t ShiftRegister128::operator[](const size_t index) const {
+
+uint8_t ShiftRegister128::operator[](const size_t index) const
+{
     size_t word_index = index / 32;
     size_t bit_index = 31 - index % 32; // Big-endian
     /*
@@ -24,7 +25,9 @@ uint8_t ShiftRegister128::operator[](const size_t index) const {
     return (state[word_index] >> bit_index) & 1;
 }
 
-void ShiftRegister128::set_bit(const size_t index, uint8_t value) {
+
+void ShiftRegister128::set_bit(const size_t index, uint8_t value)
+{
     size_t word_index = index / 32;
     size_t bit_index = 31 - index % 32; // Big-endian
     uint32_t mask = 1U << bit_index;
@@ -47,9 +50,12 @@ void ShiftRegister128::set_bit(const size_t index, uint8_t value) {
     */
 }
 
-void ShiftRegister128::shift_left_by_one(uint8_t new_bit) {
+
+void ShiftRegister128::shift_left_by_one(uint8_t new_bit)
+{
     new_bit &= 1; // ensure it is either 0 or 1
-    for (int i = 0; i < 3; ++i) {
+    for (int i = 0; i < 3; ++i)
+    {
         state[i] = (state[i] << i) | (state[i + 1] >> 31);
     }
     state[3] = (state[3] << 1) | new_bit;
