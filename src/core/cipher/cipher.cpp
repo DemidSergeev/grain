@@ -5,8 +5,8 @@ using namespace grain;
 
 Cipher::Cipher(const Key& key, const InitVector& iv) : nfsr{key}, lfsr{iv}
 {
-    init_auth_registers(); 
     warmup();
+    init_auth_registers(); 
 }
 
 
