@@ -4,7 +4,7 @@
 using namespace grain;
 
 
-ShiftRegister128::ShiftRegister128(Register128& init_state) : state(init_state) {}
+ShiftRegister128::ShiftRegister128(const Register128& init_state) : state(init_state) {}
 
 
 uint8_t ShiftRegister128::operator[](const size_t index) const
@@ -56,7 +56,7 @@ void ShiftRegister128::shift_left_by_one(uint8_t new_bit)
     new_bit &= 1; // ensure it is either 0 or 1
     for (int i = 0; i < 3; ++i)
     {
-        state[i] = (state[i] << i) | (state[i + 1] >> 31);
+        state[i] = (state[i] << 1) | (state[i + 1] >> 31);
     }
     state[3] = (state[3] << 1) | new_bit;
 }

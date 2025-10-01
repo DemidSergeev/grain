@@ -9,8 +9,8 @@ Lfsr128::Lfsr128(const InitVector& iv) : ShiftRegister128(make_state(iv)) {}
 
 uint8_t Lfsr128::generate_next_bit()
 {
-    Register128& s = state; // for brevity;
-    uint8_t new_bit = s[0] ^ s[7] ^ s[38] ^ s[70] ^ s[81] ^ s[96];
+    Lfsr128& r = *this; // for brevity;
+    uint8_t new_bit = r[0] ^ r[7] ^ r[38] ^ r[70] ^ r[81] ^ r[96];
 
     return new_bit;
 }

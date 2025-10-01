@@ -30,7 +30,7 @@ void Cipher::init_auth_registers()
 }
 
 
-void Cipher::warmup(int iterations = 256)
+void Cipher::warmup(int iterations)
 {
     for (int i = 0; i < iterations; ++i)
     {
@@ -39,7 +39,7 @@ void Cipher::warmup(int iterations = 256)
 }
 
 
-uint8_t Cipher::keystream_iter(bool warmup = false)
+uint8_t Cipher::keystream_iter(bool warmup)
 {
     uint8_t pf = preoutput_function();
     uint8_t lfsr_new_bit = lfsr.generate_next_bit();
